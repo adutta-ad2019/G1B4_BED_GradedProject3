@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+
+</head>
+<body>
+	<section>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/admin/tickets">Ticket Tracker
+					Application</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/admin/tickets">Tickets</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/admin/tickets/newTicket">New
+								Ticket</a></li>
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+		<!-- Navbar ends -->
+
+		<div class="container mt-5">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+
+					<div class="card">
+
+						<div style="background: #F1F0F0;" >
+							<h2 class="text-center">Edit Ticket</h2>
+						</div><hr class="m-0">
+
+						<form action="#" th:action="@{/admin/tickets/{id}/edit(id=${ticket.id})}"
+							method="post" th:object="${ticket}">
+
+							<!-- Title -->
+							<div class="form-group m-2 p-2">
+								<label for="title">Title</label> <input type="text" name="title"
+									class="form-control" id="title"
+									th:field="*{title}" 
+									th:value="${ticket.title}" 
+									placeholder="Enter ticket title" required>
+							</div>
+
+							<!-- Description -->
+							<div class="form-group m-2 p-2">
+								<label for="description">Short Description</label>
+								<textarea name="description" class="form-control"
+								th:field="*{description}" 
+								th:value="${ticket.description}" 
+								id="description" placeholder="Enter ticket description"
+								required></textarea>
+							</div>
+
+							<!-- Content -->
+							<div class="form-group m-2 p-2">
+								<label for="content">Content</label>
+								<textarea name="content" id="content" class="form-control"
+								th:field="*{content}" 
+								th:value="${ticket.content}"
+								placeholder="Enter content" ></textarea>
+							</div>
+
+							<div class="form-group m-2 p-2">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+</html>

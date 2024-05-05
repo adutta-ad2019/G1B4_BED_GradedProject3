@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+</head>
+<body>
+	<section>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/admin/tickets">Ticket Tracker
+					Application</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/admin/tickets">Tickets</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/admin/tickets/newTicket">New
+								Ticket</a></li>
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+		<!-- Navbar ends -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col col-lg-4">
+					<h2>List of Tickets</h2>
+
+					<form class="d-flex">
+						<input class="form-control" type="search" id="search-input" aria-label="Search">
+						<button class="btn btn-primary" type="button" onclick="search()">Search</button>
+					</form>
+				</div>
+				
+				
+				<div class="row">
+					<div class="col col-lg-8">
+						<table class="table table-striped all-tickets">
+							<thead class="table-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Ticket Title</th>
+									<th scope="col">Ticket Short Description</th>
+									<th scope="col">Ticket Created on</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="ticket : ${tickets}">
+									<td th:text="${ticket.id}" />
+									<td th:text="${ticket.title}" />
+									<td th:text="${ticket.description}" />
+									<td th:text="${ticket.creadtedDate}" />
+									<td>
+										<a th:href="@{/admin/tickets/{id}/edit(id=${ticket.id})}" type="button" class="btn btn-primary"> 
+											Edit
+										</a>
+										<a th:href="@{/admin/delete/{id}(id=${ticket.id})}" type="button" class="btn btn-danger"> 
+											Delete
+										</a>
+										<a th:href="@{/admin/tickets/{id}(id=${ticket.id})}" type="button" class="btn btn-info"> 
+											View
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<table id="search-result" class="table table-striped search-result">
+							<thead class="table-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Ticket Title</th>
+									<th scope="col">Ticket Short Description</th>
+									<th scope="col">Ticket Created on</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- search result -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+</body>
+</html>
